@@ -1,5 +1,8 @@
 ---
-titre: "EXEMPLE — Blouson chauffant"
+titre: "EXEMPLE — Poignées chauffantes"
 categorie: equipement
-note: "à supprimer ou modifier via /admin"
+image: /images/voyage-placeholder.jpg
+detail: "Compatibles montage bar-end"
+prix: 128.7
+lien: "https://www.motoblouz.com"
 ---

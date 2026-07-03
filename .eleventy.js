@@ -11,6 +11,22 @@ module.exports = function (eleventyConfig) {
   eleventyConfig.addFilter("limit", (arr, n) => {
     return (arr || []).slice(0, n);
   });
+  eleventyConfig.addFilter("hostname", (url) => {
+    try {
+      return new URL(url).hostname.replace(/^www\./, "");
+    } catch (e) {
+      return "";
+    }
+  });
+  eleventyConfig.addFilter("sumBy", (arr, key) => {
+    return (arr || []).reduce((total, item) => total + (Number(item.data[key]) || 0), 0);
+  });
+  eleventyConfig.addFilter("formatPrice", (n) => {
+    return new Intl.NumberFormat("fr-FR", {
+      minimumFractionDigits: 2,
+      maximumFractionDigits: 2,
+    }).format(Number(n) || 0);
+  });
 
   // Fichiers/dossiers copiés tels quels vers la sortie
   eleventyConfig.addPassthroughCopy("src/css");

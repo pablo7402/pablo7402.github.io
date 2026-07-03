@@ -9,48 +9,50 @@ bodyClass: page-wishlist
   <p class="lead reveal delay-1">Équipements à tester, destinations rêvées, modifications envisagées.</p>
 </section>
 
-<section class="wishlist-groups">
-  <div class="wishlist-group reveal">
-    <h2>Équipement à tester</h2>
-    <ul class="wishlist-list">
-      {% for item in collections.wishlistEquipement %}
-      <li>
-        <span class="wishlist-title">{{ item.data.titre }}</span>
-        {% if item.data.note %}<span class="wishlist-note">{{ item.data.note }}</span>{% endif %}
-      </li>
-      {% else %}
-      <li class="empty-state">Rien pour l'instant.</li>
-      {% endfor %}
-    </ul>
-  </div>
+{% set groups = [
+  { label: "Équipement à tester", items: collections.wishlistEquipement },
+  { label: "Destinations rêvées (TET)", items: collections.wishlistDestinations },
+  { label: "Modifications mécaniques", items: collections.wishlistModifications }
+] %}
 
-  <div class="wishlist-group reveal delay-1">
-    <h2>Destinations rêvées (TET)</h2>
-    <ul class="wishlist-list">
-      {% for item in collections.wishlistDestinations %}
-      <li>
-        <span class="wishlist-title">{{ item.data.titre }}</span>
-        {% if item.data.note %}<span class="wishlist-note">{{ item.data.note }}</span>{% endif %}
-      </li>
-      {% else %}
-      <li class="empty-state">Rien pour l'instant.</li>
-      {% endfor %}
-    </ul>
-  </div>
+<section class="wishlist-page">
+  {% for group in groups %}
+  <div class="wishlist-category reveal">
+    <div class="category-header">
+      <h2>{{ group.label }}</h2>
+      {% if group.items.length %}
+      <span class="category-meta">{{ group.items.length }} envie{{ "s" if group.items.length > 1 }} &middot; {{ group.items | sumBy("prix") | formatPrice }} &euro;</span>
+      {% endif %}
+    </div>
 
-  <div class="wishlist-group reveal delay-2">
-    <h2>Modifications mécaniques</h2>
-    <ul class="wishlist-list">
-      {% for item in collections.wishlistModifications %}
-      <li>
-        <span class="wishlist-title">{{ item.data.titre }}</span>
-        {% if item.data.note %}<span class="wishlist-note">{{ item.data.note }}</span>{% endif %}
-      </li>
-      {% else %}
-      <li class="empty-state">Rien pour l'instant.</li>
+    {% if group.items.length %}
+    <div class="wishlist-cards-grid">
+      {% for item in group.items %}
+      <article class="wishlist-card">
+        <div class="wishlist-card-image">
+          <img src="{{ item.data.image or '/images/voyage-placeholder.jpg' }}" alt="{{ item.data.titre }}" loading="lazy">
+        </div>
+        <div class="wishlist-card-body">
+          <h3>{{ item.data.titre }}</h3>
+          {% if item.data.detail %}<p class="wishlist-card-detail">{{ item.data.detail }}</p>{% endif %}
+          <div class="wishlist-card-price-row">
+            {% if item.data.prix %}<span class="wishlist-price">{{ item.data.prix | formatPrice }} &euro;</span>{% endif %}
+            {% if item.data.lien %}<a class="wishlist-domain" href="{{ item.data.lien }}" target="_blank" rel="noopener">{{ item.data.lien | hostname }} ↗</a>{% endif %}
+          </div>
+          {% if item.data.lien %}
+          <a class="btn-select" href="{{ item.data.lien }}" target="_blank" rel="noopener">Sélectionner</a>
+          {% else %}
+          <span class="btn-select btn-select-disabled">Sélectionner</span>
+          {% endif %}
+        </div>
+      </article>
       {% endfor %}
-    </ul>
+    </div>
+    {% else %}
+    <p class="empty-state">Rien pour l'instant.</p>
+    {% endif %}
   </div>
+  {% endfor %}
 </section>
 
 <p class="page-footnote reveal">Pour ajouter ou modifier un élément, rends-toi dans le <a href="/admin/">mode éditeur</a>.</p>

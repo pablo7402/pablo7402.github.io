@@ -1,5 +1,8 @@
 ---
 titre: "EXEMPLE — Traversée du Massif Central (TET)"
 categorie: destinations
-note: "à supprimer ou modifier via /admin"
+image: /images/voyage-placeholder-2.jpg
+detail: "Étape TET, à supprimer ou modifier via /admin"
+prix: 0
+lien: ""
 ---

@@ -50,7 +50,10 @@ collections:
           - { label: "Équipement à tester", value: "equipement" }
           - { label: "Destination rêvée (TET)", value: "destinations" }
           - { label: "Modification mécanique", value: "modifications" }
-      - { label: "Note / détail", name: "note", widget: "string", required: false }
+      - { label: "Photo", name: "image", widget: "image", required: false }
+      - { label: "Détail (sous-titre court)", name: "detail", widget: "string", required: false, hint: "Ex: référence, coloris, compatibilité..." }
+      - { label: "Prix (€)", name: "prix", widget: "number", required: false, value_type: "float" }
+      - { label: "Lien vers le site", name: "lien", widget: "string", required: false, hint: "URL de la page produit" }
 
   - name: "reglages"
     label: "Réglages du site"

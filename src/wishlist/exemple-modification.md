@@ -1,5 +1,8 @@
 ---
 titre: "EXEMPLE — Protection de carter renforcée"
 categorie: modifications
-note: "à supprimer ou modifier via /admin"
+image: /images/voyage-placeholder-3.jpg
+detail: "Aluminium anodisé"
+prix: 89.9
+lien: "https://www.kove-racing.com"
 ---
