@@ -1,14 +1,15 @@
 backend:
   name: github
-  repo: "pablo7402/pablo7402.github.io" # <-- à ajuster si tu renommes le dépôt (voir GUIDE-GITHUB-PAGES.md)
+  repo: "pablo7402/pablo7402.github.io"
   branch: main
-  base_url: "https://api.netlify.com" # Netlify sert uniquement de relais de connexion (aucun hébergement, aucun crédit consommé)
+  base_url: "https://pablo7402-github-io.vercel.app"
 
 # Sécurité : la connexion se fait avec ton compte GitHub (bouton "Login with
 # GitHub"). Seul un compte ayant les droits d'écriture sur ce dépôt peut
 # réellement enregistrer des modifications — aucun mot de passe séparé n'est
-# stocké dans le site. Netlify n'intervient que pour la connexion : le site
-# lui-même est hébergé gratuitement sur GitHub Pages (voir GUIDE-GITHUB-PAGES.md).
+# stocké dans le site. Vercel n'intervient que pour la connexion (2 petites
+# fonctions dans /api) : le site lui-même est hébergé gratuitement sur GitHub
+# Pages (voir GUIDE-GITHUB-PAGES.md).
 
 # Mode local : quand le site tourne sur localhost, Decap utilise un petit
 # serveur local (decap-server) au lieu de GitHub, pour éditer directement les
