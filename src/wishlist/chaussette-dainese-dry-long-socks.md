@@ -1,8 +1,8 @@
 ---
-titre: Chaussette Dainese Dry Long Socks
+titre: Coudières Fox Enduro Noir
 categorie: modifications
-image: https://cdn2.louis.de/dynamic/articles/o_resize,w_1800,h_1800,m_limit,c_fff::o_extension,e_webp/9d.1a.eb.ARG219937DaineseDryLongSocksM1.JPG
-detail: taille 45
-prix: 32
-lien: https://www.louis-moto.fr/fr/dainese-dry-long-socks-chaussettes-moto-219937?utm_source=chatgpt.com&filter_article_number=21993705
+image: https://product-cdn-frz.alltricks.com/large/428/887428/2887428/6160097
+detail: ""
+prix: 49.99
+lien: https://www.alltricks.fr/F-11940-protections-du-cycliste/P-3055397-coudieres_fox_enduro_noir
 ---
