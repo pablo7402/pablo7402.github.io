@@ -1,0 +1,33 @@
+---
+layout: base.njk
+titre: Voyages — Kove 800X Pro
+permalink: /voyages/
+bodyClass: page-voyages
+---
+<section class="page-header">
+  <h1 class="reveal">Voyages</h1>
+  <p class="lead reveal delay-1">Chaque étape, en quelques photos et quelques mots.</p>
+</section>
+
+<section class="journeys">
+  {% for voyage in collections.voyages %}
+  <article class="journey reveal" id="{{ voyage.data.titre | slugify }}">
+    <div class="journey-media">
+      <img src="{{ voyage.data.image or '/images/voyage-placeholder.jpg' }}" alt="{{ voyage.data.titre }}" loading="lazy">
+    </div>
+    <div class="journey-info">
+      <span class="card-eyebrow">{{ voyage.data.region }} &middot; {{ voyage.data.date }}</span>
+      <h2>{{ voyage.data.titre }}</h2>
+      <p>{{ voyage.data.resume }}</p>
+      {% if voyage.data.distance or voyage.data.duree %}
+      <ul class="journey-meta">
+        {% if voyage.data.distance %}<li>{{ voyage.data.distance }}</li>{% endif %}
+        {% if voyage.data.duree %}<li>{{ voyage.data.duree }}</li>{% endif %}
+      </ul>
+      {% endif %}
+    </div>
+  </article>
+  {% else %}
+  <p class="empty-state">Aucun voyage enregistré. Va dans le mode éditeur (<a href="/admin/">/admin</a>) pour ajouter ton premier trip.</p>
+  {% endfor %}
+</section>

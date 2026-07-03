@@ -1,0 +1,56 @@
+---
+layout: base.njk
+titre: Liste de souhaits — Kove 800X Pro
+permalink: /wishlist/
+bodyClass: page-wishlist
+---
+<section class="page-header">
+  <h1 class="reveal">Liste de souhaits</h1>
+  <p class="lead reveal delay-1">Équipements à tester, destinations rêvées, modifications envisagées.</p>
+</section>
+
+<section class="wishlist-groups">
+  <div class="wishlist-group reveal">
+    <h2>Équipement à tester</h2>
+    <ul class="wishlist-list">
+      {% for item in collections.wishlistEquipement %}
+      <li>
+        <span class="wishlist-title">{{ item.data.titre }}</span>
+        {% if item.data.note %}<span class="wishlist-note">{{ item.data.note }}</span>{% endif %}
+      </li>
+      {% else %}
+      <li class="empty-state">Rien pour l'instant.</li>
+      {% endfor %}
+    </ul>
+  </div>
+
+  <div class="wishlist-group reveal delay-1">
+    <h2>Destinations rêvées (TET)</h2>
+    <ul class="wishlist-list">
+      {% for item in collections.wishlistDestinations %}
+      <li>
+        <span class="wishlist-title">{{ item.data.titre }}</span>
+        {% if item.data.note %}<span class="wishlist-note">{{ item.data.note }}</span>{% endif %}
+      </li>
+      {% else %}
+      <li class="empty-state">Rien pour l'instant.</li>
+      {% endfor %}
+    </ul>
+  </div>
+
+  <div class="wishlist-group reveal delay-2">
+    <h2>Modifications mécaniques</h2>
+    <ul class="wishlist-list">
+      {% for item in collections.wishlistModifications %}
+      <li>
+        <span class="wishlist-title">{{ item.data.titre }}</span>
+        {% if item.data.note %}<span class="wishlist-note">{{ item.data.note }}</span>{% endif %}
+      </li>
+      {% else %}
+      <li class="empty-state">Rien pour l'instant.</li>
+      {% endfor %}
+    </ul>
+  </div>
+</section>
+
+<p class="page-footnote reveal">Pour ajouter ou modifier un élément, rends-toi dans le <a href="/admin/">mode éditeur</a>.</p>

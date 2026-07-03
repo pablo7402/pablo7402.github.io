@@ -1,0 +1,69 @@
+backend:
+  name: git-gateway
+  branch: main
+
+# Sécurité : seules les personnes invitées via Netlify Identity peuvent se
+# connecter à /admin. Aucun mot de passe n'est stocké dans le site lui-même.
+
+media_folder: "src/images/uploads"
+public_folder: "/images/uploads"
+
+publish_mode: simple
+
+locale: "fr"
+
+collections:
+  - name: "voyages"
+    label: "Voyages"
+    label_singular: "Voyage"
+    folder: "src/voyages"
+    create: true
+    delete: true
+    slug: "{{year}}-{{month}}-{{slug}}"
+    identifier_field: titre
+    summary: "{{titre}} — {{region}} ({{date}})"
+    sortable_fields: ["date", "titre"]
+    fields:
+      - { label: "Titre", name: "titre", widget: "string" }
+      - { label: "Région", name: "region", widget: "string", hint: "Ex: Cévennes, Alpes, Pyrénées..." }
+      - { label: "Date", name: "date", widget: "datetime", format: "YYYY-MM-DD", date_format: "YYYY-MM-DD", time_format: false }
+      - { label: "Photo principale", name: "image", widget: "image" }
+      - { label: "Résumé (quelques mots suffisent)", name: "resume", widget: "text" }
+      - { label: "Distance", name: "distance", widget: "string", required: false, hint: "Ex: 320 km" }
+      - { label: "Durée", name: "duree", widget: "string", required: false, hint: "Ex: 3 jours" }
+
+  - name: "wishlist"
+    label: "Liste de souhaits"
+    label_singular: "Souhait"
+    folder: "src/wishlist"
+    create: true
+    delete: true
+    slug: "{{slug}}"
+    identifier_field: titre
+    summary: "{{titre}} — {{categorie}}"
+    fields:
+      - { label: "Titre", name: "titre", widget: "string" }
+      - label: "Catégorie"
+        name: "categorie"
+        widget: "select"
+        options:
+          - { label: "Équipement à tester", value: "equipement" }
+          - { label: "Destination rêvée (TET)", value: "destinations" }
+          - { label: "Modification mécanique", value: "modifications" }
+      - { label: "Note / détail", name: "note", widget: "string", required: false }
+
+  - name: "reglages"
+    label: "Réglages du site"
+    editor:
+      preview: false
+    files:
+      - name: "accueil"
+        label: "Page d'accueil"
+        file: "src/_data/site.json"
+        fields:
+          - { label: "Titre du site (nav)", name: "titre", widget: "string" }
+          - { label: "Phrase d'accroche (hero)", name: "sousTitre", widget: "string" }
+          - { label: "Texte sous l'accroche", name: "heroTexte", widget: "text" }
+          - { label: "Photo du hero (plein écran)", name: "heroImage", widget: "image" }
+          - { label: "Nom (pied de page)", name: "auteur", widget: "string" }
+          - { label: "Année (pied de page)", name: "annee", widget: "number" }

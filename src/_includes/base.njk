@@ -1,0 +1,40 @@
+<!doctype html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>{{ titre or site.titre }}</title>
+  <meta name="description" content="{{ description or 'Site personnel - moto, voyages et aventures.' }}">
+  <link rel="icon" href="data:,">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/css/style.css">
+</head>
+<body class="{{ bodyClass }}">
+  <header class="nav">
+    <div class="nav-inner">
+      <a href="/" class="nav-logo">{{ site.titre }}</a>
+      <nav class="nav-links">
+        <a href="/" {% if page.url == '/' %}aria-current="page"{% endif %}>Accueil</a>
+        <a href="/voyages/" {% if page.url == '/voyages/' %}aria-current="page"{% endif %}>Voyages</a>
+        <a href="/wishlist/" {% if page.url == '/wishlist/' %}aria-current="page"{% endif %}>Liste de souhaits</a>
+      </nav>
+      <button class="nav-theme" id="theme-toggle" aria-label="Basculer le mode sombre">
+        <span class="dot"></span>
+      </button>
+    </div>
+  </header>
+
+  <main>
+    {{ content | safe }}
+  </main>
+
+  <footer class="site-footer">
+    <p>{{ site.auteur }} &middot; {{ site.annee }}</p>
+    <a href="/admin/" class="footer-admin">Éditer</a>
+  </footer>
+
+  <script src="/js/main.js" defer></script>
+</body>
+</html>
