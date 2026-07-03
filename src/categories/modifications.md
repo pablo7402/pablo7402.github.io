@@ -1,4 +1,4 @@
 ---
-nom: "Modifications mécaniques"
-ordre: 3
+nom: Équipement pilote
+ordre: 2
 ---
