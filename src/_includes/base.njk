@@ -1,17 +1,6 @@
 <!doctype html>
 <html lang="fr">
 <head>
-  <script>
-    // Les liens d'invitation / réinitialisation Netlify Identity arrivent sur
-    // la page d'accueil avec un token dans l'URL (#invite_token=...). On les
-    // redirige vers /admin/ où se trouve le formulaire qui sait les traiter.
-    (function () {
-      var hash = window.location.hash;
-      if (hash && /invite_token|recovery_token|confirmation_token|email_change_token/.test(hash) && window.location.pathname.indexOf("/admin") !== 0) {
-        window.location.replace("/admin/" + hash);
-      }
-    })();
-  </script>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>{{ titre or site.titre }}</title>

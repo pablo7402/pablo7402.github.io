@@ -1,9 +1,14 @@
 backend:
-  name: git-gateway
+  name: github
+  repo: "TON-COMPTE-GITHUB/site-moto" # <-- à remplacer par ton propre dépôt (ex: pablo7402/site-moto)
   branch: main
+  base_url: "https://TON-SITE.pages.dev" # <-- à remplacer par l'URL de ton site Cloudflare Pages
+  auth_endpoint: "api/auth"
 
-# Sécurité : seules les personnes invitées via Netlify Identity peuvent se
-# connecter à /admin. Aucun mot de passe n'est stocké dans le site lui-même.
+# Sécurité : la connexion se fait avec ton compte GitHub (bouton "Login with
+# GitHub"). Seul un compte ayant les droits d'écriture sur ce dépôt peut
+# réellement enregistrer des modifications — aucun mot de passe séparé n'est
+# stocké dans le site.
 
 media_folder: "src/images/uploads"
 public_folder: "/images/uploads"
