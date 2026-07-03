@@ -1,4 +1,4 @@
 ---
-nom: "Équipement à tester"
+nom: "Moto "
 ordre: 1
 ---
