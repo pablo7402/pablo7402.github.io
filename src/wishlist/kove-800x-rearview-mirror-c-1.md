@@ -1,7 +1,7 @@
 ---
-titre: kove 800X Rearview mirror (C)
+titre: Mosko Moto Reckless 80L
 categorie: equipement
-image: https://unclewang.net/cdn/shop/files/22_a5cb8f46-212f-464c-bf80-9b3fc7963375.jpg?v=1723200735
-prix: 8.35
-lien: https://unclewang.net/products/kove-800x-rearview-mirror-b?variant=50990453293376
+image: https://moskomoto.eu/cdn/shop/files/reckless-80l-v4-triple-black-noauxpox-mosko-moto-hero-web-res_2000x.jpg?v=1776466942
+prix: 934.15
+lien: https://moskomoto.eu/products/reckless-80l-v4-0?variant=44404906754127
 ---
