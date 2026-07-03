@@ -27,6 +27,9 @@ module.exports = function (eleventyConfig) {
       maximumFractionDigits: 2,
     }).format(Number(n) || 0);
   });
+  eleventyConfig.addFilter("byCategory", (arr, slug) => {
+    return (arr || []).filter((item) => item.data.categorie === slug);
+  });
 
   // Fichiers/dossiers copiés tels quels vers la sortie
   eleventyConfig.addPassthroughCopy("src/css");
@@ -41,21 +44,16 @@ module.exports = function (eleventyConfig) {
     });
   });
 
-  // Collections Wishlist par catégorie
-  eleventyConfig.addCollection("wishlistEquipement", (collectionApi) => {
-    return collectionApi.getFilteredByGlob("src/wishlist/*.md").filter(
-      (item) => item.data.categorie === "equipement"
-    );
+  // Toutes les entrées de la Wishlist (non filtrées)
+  eleventyConfig.addCollection("wishlist", (collectionApi) => {
+    return collectionApi.getFilteredByGlob("src/wishlist/*.md");
   });
-  eleventyConfig.addCollection("wishlistDestinations", (collectionApi) => {
-    return collectionApi.getFilteredByGlob("src/wishlist/*.md").filter(
-      (item) => item.data.categorie === "destinations"
-    );
-  });
-  eleventyConfig.addCollection("wishlistModifications", (collectionApi) => {
-    return collectionApi.getFilteredByGlob("src/wishlist/*.md").filter(
-      (item) => item.data.categorie === "modifications"
-    );
+
+  // Catégories de la Wishlist, gérées librement depuis /admin, triées par "ordre"
+  eleventyConfig.addCollection("categories", (collectionApi) => {
+    return collectionApi.getFilteredByGlob("src/categories/*.md").sort((a, b) => {
+      return (Number(a.data.ordre) || 0) - (Number(b.data.ordre) || 0);
+    });
   });
 
   return {

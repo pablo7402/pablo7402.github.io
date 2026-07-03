@@ -13,6 +13,19 @@ publish_mode: simple
 locale: "fr"
 
 collections:
+  - name: "categories"
+    label: "Catégories (Wishlist)"
+    label_singular: "Catégorie"
+    folder: "src/categories"
+    create: true
+    delete: true
+    slug: "{{slug}}"
+    identifier_field: nom
+    summary: "{{nom}}"
+    fields:
+      - { label: "Nom de la catégorie", name: "nom", widget: "string" }
+      - { label: "Ordre d'affichage", name: "ordre", widget: "number", required: false, default: 10, hint: "Petit nombre = affichée en premier" }
+
   - name: "voyages"
     label: "Voyages"
     label_singular: "Voyage"
@@ -45,11 +58,12 @@ collections:
       - { label: "Titre", name: "titre", widget: "string" }
       - label: "Catégorie"
         name: "categorie"
-        widget: "select"
-        options:
-          - { label: "Équipement à tester", value: "equipement" }
-          - { label: "Destination rêvée (TET)", value: "destinations" }
-          - { label: "Modification mécanique", value: "modifications" }
+        widget: "relation"
+        collection: "categories"
+        search_fields: ["nom"]
+        value_field: "{{slug}}"
+        display_fields: ["nom"]
+        hint: "Choisis une catégorie existante, ou crée-en une nouvelle depuis la section Catégories."
       - { label: "Photo", name: "image", widget: "image", required: false }
       - { label: "Détail (sous-titre court)", name: "detail", widget: "string", required: false, hint: "Ex: référence, coloris, compatibilité..." }
       - { label: "Prix (€)", name: "prix", widget: "number", required: false, value_type: "float" }

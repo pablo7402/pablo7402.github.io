@@ -9,25 +9,20 @@ bodyClass: page-wishlist
   <p class="lead reveal delay-1">Équipements à tester, destinations rêvées, modifications envisagées.</p>
 </section>
 
-{% set groups = [
-  { label: "Équipement à tester", items: collections.wishlistEquipement },
-  { label: "Destinations rêvées (TET)", items: collections.wishlistDestinations },
-  { label: "Modifications mécaniques", items: collections.wishlistModifications }
-] %}
-
 <section class="wishlist-page">
-  {% for group in groups %}
+  {% for cat in collections.categories %}
+  {% set items = collections.wishlist | byCategory(cat.fileSlug) %}
   <div class="wishlist-category reveal">
     <div class="category-header">
-      <h2>{{ group.label }}</h2>
-      {% if group.items.length %}
-      <span class="category-meta">{{ group.items.length }} envie{{ "s" if group.items.length > 1 }} &middot; {{ group.items | sumBy("prix") | formatPrice }} &euro;</span>
+      <h2>{{ cat.data.nom }}</h2>
+      {% if items.length %}
+      <span class="category-meta">{{ items.length }} envie{{ "s" if items.length > 1 }} &middot; {{ items | sumBy("prix") | formatPrice }} &euro;</span>
       {% endif %}
     </div>
 
-    {% if group.items.length %}
+    {% if items.length %}
     <div class="wishlist-cards-grid">
-      {% for item in group.items %}
+      {% for item in items %}
       <article class="wishlist-card">
         <div class="wishlist-card-image">
           <img src="{{ item.data.image or '/images/voyage-placeholder.jpg' }}" alt="{{ item.data.titre }}" loading="lazy">
@@ -52,7 +47,9 @@ bodyClass: page-wishlist
     <p class="empty-state">Rien pour l'instant.</p>
     {% endif %}
   </div>
+  {% else %}
+  <p class="empty-state">Aucune catégorie pour l'instant. Crée-en une depuis <a href="/admin/">/admin</a> &rarr; Catégories.</p>
   {% endfor %}
 </section>
 
-<p class="page-footnote reveal">Pour ajouter ou modifier un élément, rends-toi dans le <a href="/admin/">mode éditeur</a>.</p>
+<p class="page-footnote reveal">Ajoute ou modifie des souhaits, ou crée/renomme des catégories, depuis le <a href="/admin/">mode éditeur</a>.</p>
