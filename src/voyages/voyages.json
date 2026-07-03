@@ -1,3 +1,4 @@
 {
-  "permalink": false
+  "layout": "voyage-detail.njk",
+  "permalink": "/voyages/{{ page.fileSlug }}/"
 }

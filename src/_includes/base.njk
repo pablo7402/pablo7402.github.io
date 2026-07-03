@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>{{ titre or site.titre }}</title>
+  <title>{% if titre %}{{ titre | shorten(55) }} — {% endif %}{{ site.titre }}</title>
   <meta name="description" content="{{ description or 'Site personnel - moto, voyages et aventures.' }}">
   <link rel="icon" href="data:,">
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -18,6 +18,7 @@
       <nav class="nav-links">
         <a href="/" {% if page.url == '/' %}aria-current="page"{% endif %}>Accueil</a>
         <a href="/voyages/" {% if page.url == '/voyages/' %}aria-current="page"{% endif %}>Voyages</a>
+        <a href="/garage/" {% if page.url == '/garage/' %}aria-current="page"{% endif %}>Garage</a>
         <a href="/wishlist/" {% if page.url == '/wishlist/' %}aria-current="page"{% endif %}>Liste de souhaits</a>
       </nav>
       <button class="nav-theme" id="theme-toggle" aria-label="Basculer le mode sombre">

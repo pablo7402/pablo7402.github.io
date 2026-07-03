@@ -1,0 +1,29 @@
+---
+layout: base.njk
+titre: Garage
+permalink: /garage/
+bodyClass: page-garage
+---
+<section class="page-header">
+  <h1 class="reveal">Le garage</h1>
+  <p class="lead reveal delay-1">Les motos du carnet. Clique sur une vignette pour voir tous les détails.</p>
+</section>
+
+<section class="cards-grid garage-grid">
+  {% for moto in collections.garage %}
+  <a class="card garage-card reveal" href="{{ moto.url }}">
+    <div class="card-image">
+      <img src="{{ moto.data.image or '/images/voyage-placeholder.jpg' }}" alt="{{ moto.data.titre or 'Moto' }}" loading="lazy">
+    </div>
+    <div class="card-body">
+      {% if moto.data.marque or moto.data.modele %}
+      <span class="card-eyebrow">{{ moto.data.marque }} {{ moto.data.modele }}</span>
+      {% endif %}
+      <h3>{{ moto.data.titre or "Moto sans nom" }}</h3>
+      {% if moto.data.surnom %}<p class="card-excerpt">{{ moto.data.surnom }}</p>{% endif %}
+    </div>
+  </a>
+  {% else %}
+  <p class="empty-state">Aucune moto pour l'instant. Ajoute-en une depuis <a href="/admin/">/admin</a> &rarr; Garage.</p>
+  {% endfor %}
+</section>

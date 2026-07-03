@@ -1,8 +1,14 @@
 {
+  "heroImage": "/images/uploads/gemini_generated_image_flylwuflylwuflyl.png",
+  "annee": 2026,
+  "ctaTitre": "Une envie, des rêves, la wishlist !",
+  "auteur": "Pablo",
+  "sectionVoyagesTitre": "Derniers trips",
+  "heroBouton": "Voir les voyages",
+  "apropos": "Passionné de trail et de grands espaces, je parcours cols, pistes et sentiers oubliés à bord de ma Kove 800X Pro. Ce carnet rassemble mes voyages, mes envies d'équipement et les destinations qui me font rêver — un espace personnel, sans artifice, pour garder une trace de chaque route parcourue.",
+  "sectionVoyagesTexte": "Quelques étapes récentes, en un coup d'œil.",
   "titre": "Le carnet de Pablo",
   "sousTitre": "L'aventure, simplement.",
-  "heroTexte": "XXXX",
-  "heroImage": "/images/hero-placeholder.jpg",
-  "auteur": "Pablo",
-  "annee": 2026
+  "ctaBouton": "Voir la liste de souhaits",
+  "heroTexte": "Trail, montagne, liberté. Le carnet de pablo"
 }

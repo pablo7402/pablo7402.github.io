@@ -1,0 +1,4 @@
+{
+  "layout": "garage-detail.njk",
+  "permalink": "/garage/{{ page.fileSlug }}/"
+}

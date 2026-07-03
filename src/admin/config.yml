@@ -10,6 +10,11 @@ backend:
 # réellement enregistrer des modifications — aucun mot de passe séparé n'est
 # stocké dans le site.
 
+# Mode local : quand le site tourne sur localhost, Decap utilise un petit
+# serveur local (decap-server) au lieu de GitHub, pour éditer directement les
+# fichiers sur ton disque. Voir GUIDE-TEST-LOCAL.md pour la marche à suivre.
+local_backend: true
+
 media_folder: "src/images/uploads"
 public_folder: "/images/uploads"
 
@@ -37,7 +42,8 @@ collections:
     folder: "src/voyages"
     create: true
     delete: true
-    slug: "{{uuid}}"
+    identifier_field: titre
+    slug: "{{slug}}"
     summary: "{{titre}}"
     sortable_fields: ["date", "titre"]
     fields:
@@ -46,6 +52,12 @@ collections:
       - { label: "Date", name: "date", widget: "datetime", required: false, format: "YYYY-MM-DD", date_format: "YYYY-MM-DD", time_format: false }
       - { label: "Distance", name: "distance", widget: "string", required: false, hint: "Ex: 320 km" }
       - { label: "Durée", name: "duree", widget: "string", required: false, hint: "Ex: 3 jours" }
+      - label: "Étiquettes"
+        name: "tags"
+        widget: "list"
+        required: false
+        hint: "Ex: Montagne, hors-piste, sinueux..."
+        field: { label: "Étiquette", name: "label", widget: "string" }
       - { label: "Photo de couverture", name: "image", widget: "image", required: false }
       - { label: "Résumé court (affiché sur la page d'accueil)", name: "resume", widget: "text", required: false }
       - { label: "Récit / notes", name: "body", widget: "markdown", required: false, hint: "Raconte le trip : étapes, anecdotes, ressenti... aussi long ou court que tu veux." }
@@ -59,6 +71,42 @@ collections:
         widget: "list"
         required: false
         field: { label: "Lien YouTube", name: "url", widget: "string", hint: "Colle l'URL de la vidéo (ex: https://youtu.be/...)" }
+      - { label: "Lien album photos complet", name: "albumPhotos", widget: "string", required: false, hint: "Lien vers un album Google Photos (ou autre) en mode Restreint, à partager uniquement à tes amis. Un bouton apparaîtra sur la page du voyage." }
+
+  - name: "garage"
+    label: "Garage"
+    label_singular: "Moto"
+    folder: "src/garage"
+    create: true
+    delete: true
+    identifier_field: titre
+    slug: "{{slug}}"
+    summary: "{{titre}}"
+    sortable_fields: ["ordre", "titre"]
+    fields:
+      - { label: "Nom / titre", name: "titre", widget: "string", hint: "Ex: Ma Kove 800X Pro" }
+      - { label: "Surnom (pilote/moto)", name: "surnom", widget: "string", required: false, hint: "Ex: Pablo & la Bête" }
+      - { label: "Marque", name: "marque", widget: "string", required: false }
+      - { label: "Modèle", name: "modele", widget: "string", required: false }
+      - { label: "Année", name: "annee", widget: "number", required: false, value_type: "int" }
+      - { label: "Ordre d'affichage", name: "ordre", widget: "number", required: false, default: 10, hint: "Petit nombre = affichée en premier" }
+      - { label: "Photo de couverture", name: "image", widget: "image", required: false }
+      - { label: "Cylindrée", name: "cylindree", widget: "string", required: false, hint: "Ex: 799 cm³" }
+      - { label: "Puissance", name: "puissance", widget: "string", required: false, hint: "Ex: 94 ch" }
+      - { label: "Poids", name: "poids", widget: "string", required: false, hint: "Ex: 199 kg (tous pleins faits)" }
+      - { label: "Kilométrage", name: "kilometrage", widget: "string", required: false, hint: "Ex: 8 500 km" }
+      - { label: "Description", name: "body", widget: "markdown", required: false, hint: "Présentation de la moto, ressenti, pourquoi ce choix..." }
+      - label: "Modifications / accessoires"
+        name: "modifications"
+        widget: "list"
+        required: false
+        hint: "Ex: Pare-carter, valises, selle rehaussée..."
+        field: { label: "Modification", name: "label", widget: "string" }
+      - label: "Photos supplémentaires"
+        name: "photos"
+        widget: "list"
+        required: false
+        field: { label: "Photo", name: "src", widget: "image" }
 
   - name: "wishlist"
     label: "Liste de souhaits"
@@ -97,5 +145,11 @@ collections:
           - { label: "Phrase d'accroche (hero)", name: "sousTitre", widget: "string" }
           - { label: "Texte sous l'accroche", name: "heroTexte", widget: "text" }
           - { label: "Photo du hero (plein écran)", name: "heroImage", widget: "image" }
+          - { label: "Texte du bouton du hero", name: "heroBouton", widget: "string" }
+          - { label: "À propos (paragraphe de présentation)", name: "apropos", widget: "text", required: false }
+          - { label: "Titre de la section Voyages", name: "sectionVoyagesTitre", widget: "string" }
+          - { label: "Texte de la section Voyages", name: "sectionVoyagesTexte", widget: "string" }
+          - { label: "Titre du bandeau Wishlist", name: "ctaTitre", widget: "string" }
+          - { label: "Texte du bouton Wishlist", name: "ctaBouton", widget: "string" }
           - { label: "Nom (pied de page)", name: "auteur", widget: "string" }
           - { label: "Année (pied de page)", name: "annee", widget: "number" }

@@ -1,6 +1,5 @@
 ---
 layout: base.njk
-titre: Kove 800X Pro — Accueil
 bodyClass: page-home
 ---
 <section class="hero">
@@ -9,19 +8,19 @@ bodyClass: page-home
   <div class="hero-copy">
     <h1 class="reveal">{{ site.sousTitre }}</h1>
     <p class="reveal delay-1">{{ site.heroTexte }}</p>
-    <a class="btn" href="/voyages/">Voir les voyages</a>
+    <a class="btn" href="/voyages/">{{ site.heroBouton }}</a>
   </div>
   <div class="scroll-hint reveal delay-2">↓</div>
 </section>
 
 <section class="section-intro">
-  <h2 class="reveal">Derniers trips</h2>
-  <p class="lead reveal delay-1">Quelques étapes récentes, en un coup d'œil.</p>
+  <h2 class="reveal">{{ site.sectionVoyagesTitre }}</h2>
+  <p class="lead reveal delay-1">{{ site.sectionVoyagesTexte }}</p>
 </section>
 
 <section class="cards-grid">
   {% for voyage in collections.voyages | limit(3) %}
-  <a class="card reveal" href="/voyages/#{{ (voyage.data.titre or voyage.data.region or 'etape-' + loop.index) | slugify }}">
+  <a class="card reveal" href="{{ voyage.url }}">
     <div class="card-image">
       <img src="{{ voyage.data.image or '/images/voyage-placeholder.jpg' }}" alt="{{ voyage.data.titre or 'Voyage' }}" loading="lazy">
     </div>
@@ -36,7 +35,14 @@ bodyClass: page-home
   {% endfor %}
 </section>
 
+{% if site.apropos %}
+<section class="about-section">
+  <h2 class="reveal">À propos</h2>
+  <p class="lead reveal delay-1">{{ site.apropos }}</p>
+</section>
+{% endif %}
+
 <section class="cta-band reveal">
-  <h2>Une idée, un équipement, une destination en tête ?</h2>
-  <a class="btn btn-secondary" href="/wishlist/">Voir la liste de souhaits</a>
+  <h2>{{ site.ctaTitre }}</h2>
+  <a class="btn btn-secondary" href="/wishlist/">{{ site.ctaBouton }}</a>
 </section>

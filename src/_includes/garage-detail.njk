@@ -1,0 +1,88 @@
+---
+layout: base.njk
+bodyClass: page-garage-detail
+---
+<section class="journey-detail-wrap">
+  <p class="breadcrumb reveal">
+    <a href="/garage/">Garage</a>
+    <span>/</span>
+    <span>{{ titre or "Moto sans nom" }}</span>
+  </p>
+
+  <article class="journey journey-detail">
+    {% if image %}
+    <div class="journey-media reveal">
+      <img src="{{ image }}" alt="{{ titre or 'Photo de moto' }}" loading="lazy">
+    </div>
+    {% endif %}
+
+    <div class="journey-info">
+      <span class="card-eyebrow reveal">{{ marque }} {{ modele }}{% if annee %} &middot; {{ annee }}{% endif %}</span>
+      <h1 class="reveal">{{ titre or "Moto sans nom" }}</h1>
+      {% if surnom %}<p class="journey-resume reveal">{{ surnom }}</p>{% endif %}
+
+      {% set specs = [
+        { label: "Cylindrée", value: cylindree },
+        { label: "Puissance", value: puissance },
+        { label: "Poids", value: poids },
+        { label: "Kilométrage", value: kilometrage }
+      ] %}
+      {% if specs | selectattr("value") | list | length %}
+      <div class="garage-specs reveal">
+        {% for spec in specs %}
+        {% if spec.value %}
+        <div class="garage-spec">
+          <span class="garage-spec-label">{{ spec.label }}</span>
+          <span class="garage-spec-value">{{ spec.value }}</span>
+        </div>
+        {% endif %}
+        {% endfor %}
+      </div>
+      {% endif %}
+
+      {% if content %}
+      <div class="journey-recit reveal">{{ content | safe }}</div>
+      {% endif %}
+
+      {% set modsList = modifications | validTags %}
+      {% if modsList.length %}
+      <div class="garage-mods reveal">
+        <h3>Modifications</h3>
+        <ul>
+          {% for mod in modsList %}
+          <li>{{ mod }}</li>
+          {% endfor %}
+        </ul>
+      </div>
+      {% endif %}
+
+      {% set photosList = photos | validPhotos %}
+      {% if photosList.length == 1 %}
+      <div class="journey-gallery reveal">
+        <div class="journey-gallery-item">
+          <img src="{{ photosList[0] }}" alt="{{ titre or 'Photo de moto' }}" loading="lazy">
+        </div>
+      </div>
+      {% elif photosList.length > 1 %}
+      <div class="journey-carousel reveal">
+        <div class="carousel-track" data-carousel>
+          {% for photo in photosList %}
+          <div class="carousel-slide">
+            <img src="{{ photo }}" alt="{{ titre or 'Photo de moto' }}" loading="lazy">
+          </div>
+          {% endfor %}
+        </div>
+        <button class="carousel-arrow carousel-prev" data-carousel-prev aria-label="Photo précédente">&lsaquo;</button>
+        <button class="carousel-arrow carousel-next" data-carousel-next aria-label="Photo suivante">&rsaquo;</button>
+        <div class="carousel-dots" data-carousel-dots>
+          {% for photo in photosList %}
+          <button class="carousel-dot{% if loop.first %} is-active{% endif %}" data-carousel-dot aria-label="Aller à la photo {{ loop.index }}"></button>
+          {% endfor %}
+        </div>
+      </div>
+      {% endif %}
+
+      <a class="back-link reveal" href="/garage/">&larr; Tout le garage</a>
+    </div>
+  </article>
+</section>

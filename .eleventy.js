@@ -37,11 +37,27 @@ module.exports = function (eleventyConfig) {
     );
     return match ? match[1] : "";
   });
+  // Decap enregistre parfois ces listes comme des textes simples, parfois
+  // comme des objets ({ src: ... }) selon la façon dont l'entrée a été créée.
+  // Ces filtres acceptent les deux formats et renvoient toujours du texte simple.
   eleventyConfig.addFilter("validVideos", (arr) => {
-    return (arr || []).filter((v) => v && v.url);
+    return (arr || [])
+      .map((v) => (typeof v === "string" ? v : v && v.url))
+      .filter(Boolean);
   });
   eleventyConfig.addFilter("validPhotos", (arr) => {
-    return (arr || []).filter((p) => p && p.src);
+    return (arr || [])
+      .map((p) => (typeof p === "string" ? p : p && p.src))
+      .filter(Boolean);
+  });
+  eleventyConfig.addFilter("validTags", (arr) => {
+    return (arr || [])
+      .map((t) => (typeof t === "string" ? t : t && t.label))
+      .filter(Boolean);
+  });
+  eleventyConfig.addFilter("shorten", (str, n) => {
+    const s = String(str || "");
+    return s.length > n ? s.slice(0, n).trim() + "…" : s;
   });
   eleventyConfig.addFilter("journeyMeta", (data) => {
     if (!data) return "";
@@ -68,8 +84,13 @@ module.exports = function (eleventyConfig) {
 
   // Collection Voyages, triée du plus récent au plus ancien
   eleventyConfig.addCollection("voyages", (collectionApi) => {
+    const toTime = (d) => {
+      if (!d) return 0;
+      const t = new Date(d).getTime();
+      return isNaN(t) ? 0 : t;
+    };
     return collectionApi.getFilteredByGlob("src/voyages/*.md").sort((a, b) => {
-      return (b.data.date || "").localeCompare(a.data.date || "");
+      return toTime(b.data.date) - toTime(a.data.date);
     });
   });
 
@@ -81,6 +102,13 @@ module.exports = function (eleventyConfig) {
   // Catégories de la Wishlist, gérées librement depuis /admin, triées par "ordre"
   eleventyConfig.addCollection("categories", (collectionApi) => {
     return collectionApi.getFilteredByGlob("src/categories/*.md").sort((a, b) => {
+      return (Number(a.data.ordre) || 0) - (Number(b.data.ordre) || 0);
+    });
+  });
+
+  // Garage : les motos, triées par "ordre"
+  eleventyConfig.addCollection("garage", (collectionApi) => {
+    return collectionApi.getFilteredByGlob("src/garage/*.md").sort((a, b) => {
       return (Number(a.data.ordre) || 0) - (Number(b.data.ordre) || 0);
     });
   });

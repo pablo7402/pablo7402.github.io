@@ -1,7 +1,3 @@
-name = "lecarnetdepablo"
-compatibility_date = "2026-07-01"
-main = "worker.js"
-
-[assets]
-directory = "_site"
-binding = "ASSETS"
+# Ce fichier n'est plus utilisé (on repart sur Cloudflare Pages "classique",
+# qui ne nécessite pas wrangler). Tu peux le supprimer sans risque via le
+# Finder ou GitHub Desktop.

@@ -9,6 +9,9 @@
   --text: #1d1d1f;
   --text-soft: #6e6e73;
   --accent: #0071e3;
+  --accent-soft-bg: #eaf3ff;
+  --accent-soft-text: #0868c4;
+  --wash-gradient: linear-gradient(135deg, #eef6ff 0%, #f5eefc 55%, #fff4ec 100%);
   --border: rgba(0, 0, 0, 0.08);
   --card-bg: #ffffff;
   --radius-lg: 28px;
@@ -24,6 +27,9 @@
   --text: #f5f5f7;
   --text-soft: #a1a1a6;
   --accent: #2997ff;
+  --accent-soft-bg: rgba(41, 151, 255, 0.14);
+  --accent-soft-text: #6ab6ff;
+  --wash-gradient: linear-gradient(135deg, rgba(41,151,255,0.10) 0%, rgba(191,110,255,0.08) 55%, rgba(255,159,90,0.08) 100%);
   --border: rgba(255, 255, 255, 0.12);
   --card-bg: #1c1c1e;
   color-scheme: dark;
@@ -233,6 +239,25 @@ a { color: inherit; text-decoration: none; }
   margin: 0 auto;
 }
 
+.about-section {
+  max-width: 700px;
+  margin: 0 auto;
+  padding: 40px 24px 100px;
+  text-align: center;
+}
+
+.about-section h2 {
+  font-size: clamp(1.6rem, 3vw, 2.2rem);
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  margin: 0 0 16px;
+}
+
+.about-section .lead {
+  font-size: 1.05rem;
+  line-height: 1.7;
+}
+
 /* ---------- Cards (Accueil) ---------- */
 .cards-grid {
   max-width: var(--max);
@@ -253,7 +278,7 @@ a { color: inherit; text-decoration: none; }
 
 .card:hover {
   transform: translateY(-6px);
-  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.12);
+  box-shadow: 0 20px 40px rgba(41, 121, 255, 0.14);
 }
 
 .card-image { aspect-ratio: 4 / 3; overflow: hidden; }
@@ -267,7 +292,7 @@ a { color: inherit; text-decoration: none; }
   font-weight: 600;
   text-transform: uppercase;
   letter-spacing: 0.06em;
-  color: var(--accent);
+  color: var(--accent-soft-text);
 }
 
 .card-body h3 {
@@ -286,7 +311,7 @@ a { color: inherit; text-decoration: none; }
 
 /* ---------- CTA band ---------- */
 .cta-band {
-  background: var(--bg-alt);
+  background: var(--wash-gradient);
   padding: 90px 24px;
   text-align: center;
   border-top: 1px solid var(--border);
@@ -299,22 +324,104 @@ a { color: inherit; text-decoration: none; }
   margin: 0 0 28px;
 }
 
-/* ---------- Voyages (carnet de bord) ---------- */
-.journeys {
+/* ---------- Voyages : grille (liste) ---------- */
+.journeys-grid {
+  padding-top: 24px;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  gap: 16px;
+}
+
+.journey-card .card-body { padding: 14px 16px 18px; }
+
+.journey-card .card-eyebrow { font-size: 10px; }
+
+.journey-card h3 {
+  font-size: 1rem;
+  margin: 6px 0 4px;
+}
+
+.card-excerpt {
+  font-size: 0.82rem;
+  font-weight: 300;
+  color: var(--text-soft);
+  line-height: 1.5;
+  margin: 4px 0 0;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.journey-card .tag-row { margin-top: 10px; gap: 6px; }
+.journey-card .tag-pill { font-size: 10px; padding: 4px 10px; }
+
+/* Étiquettes */
+.tag-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-top: 14px;
+}
+
+.tag-pill {
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.02em;
+  padding: 5px 12px;
+  border-radius: 980px;
+  background: var(--accent-soft-bg);
+  color: var(--accent-soft-text);
+  border: none;
+}
+
+/* ---------- Voyages : page de détail ---------- */
+.journey-detail-wrap {
   max-width: 900px;
   margin: 0 auto;
-  padding: 20px 24px 120px;
-  display: flex;
-  flex-direction: column;
-  gap: 100px;
+  padding: 40px 24px 120px;
 }
+
+.breadcrumb {
+  font-size: 0.85rem;
+  font-weight: 500;
+  color: var(--text-soft);
+  margin: 0 0 32px;
+}
+
+.breadcrumb a { color: var(--text-soft); transition: color 0.2s ease; }
+.breadcrumb a:hover { color: var(--accent); }
+.breadcrumb span:first-of-type { margin: 0 8px; }
+
+.back-link {
+  display: inline-block;
+  font-size: 0.9rem;
+  font-weight: 500;
+  color: var(--text-soft);
+  margin-top: 48px;
+  transition: color 0.2s ease;
+}
+
+.back-link:hover { color: var(--accent); }
+
+.album-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  margin-top: 32px;
+  padding: 12px 22px;
+  border-radius: 980px;
+  background: var(--accent-soft-bg);
+  color: var(--accent-soft-text);
+  font-size: 0.9rem;
+  font-weight: 600;
+  transition: background 0.25s ease, transform 0.25s ease;
+}
+
+.album-link:hover { background: var(--accent); color: #fff; transform: translateY(-1px); }
 
 .journey {
-  padding-bottom: 90px;
-  border-bottom: 1px solid var(--border);
+  padding-bottom: 0;
 }
-
-.journey:last-child { border-bottom: none; padding-bottom: 0; }
 
 .journey-media {
   border-radius: var(--radius-lg);
@@ -325,6 +432,7 @@ a { color: inherit; text-decoration: none; }
 
 .journey-media img { width: 100%; height: 100%; object-fit: cover; }
 
+.journey-info h1,
 .journey-info h2 {
   font-size: clamp(1.6rem, 3vw, 2.4rem);
   font-weight: 700;
@@ -346,7 +454,7 @@ a { color: inherit; text-decoration: none; }
   font-weight: 600;
   text-transform: uppercase;
   letter-spacing: 0.06em;
-  color: var(--accent);
+  color: var(--accent-soft-text);
 }
 
 /* Récit (markdown) */
@@ -398,6 +506,96 @@ a { color: inherit; text-decoration: none; }
 }
 
 .journey-gallery-item:hover img { transform: scale(1.06); }
+
+/* Carrousel photo (style Apple) */
+.journey-carousel {
+  position: relative;
+  margin-top: 32px;
+}
+
+.carousel-track {
+  display: flex;
+  gap: 16px;
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  -webkit-overflow-scrolling: touch;
+  scrollbar-width: none;
+  border-radius: var(--radius-lg);
+  padding-bottom: 2px;
+}
+
+.carousel-track::-webkit-scrollbar { display: none; }
+
+.carousel-slide {
+  flex: 0 0 82%;
+  scroll-snap-align: center;
+  aspect-ratio: 4 / 3;
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  background: var(--bg-alt);
+}
+
+.carousel-slide img { width: 100%; height: 100%; object-fit: cover; }
+
+@media (min-width: 700px) {
+  .carousel-slide { flex-basis: 62%; }
+}
+
+.carousel-dots {
+  display: flex;
+  justify-content: center;
+  gap: 8px;
+  margin-top: 18px;
+}
+
+.carousel-dot {
+  width: 7px;
+  height: 7px;
+  padding: 0;
+  border: none;
+  border-radius: 50%;
+  background: var(--border);
+  cursor: pointer;
+  transition: background 0.25s ease, transform 0.25s ease;
+}
+
+.carousel-dot.is-active {
+  background: var(--text);
+  transform: scale(1.35);
+}
+
+.carousel-arrow {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 38px;
+  height: 38px;
+  border-radius: 50%;
+  border: 1px solid var(--border);
+  background: rgba(255, 255, 255, 0.85);
+  backdrop-filter: blur(6px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 20px;
+  line-height: 1;
+  color: var(--text);
+  cursor: pointer;
+  opacity: 0;
+  transition: opacity 0.25s ease;
+  z-index: 2;
+}
+
+@media (hover: hover) {
+  .journey-carousel:hover .carousel-arrow { opacity: 1; }
+}
+
+.carousel-prev { left: 8px; }
+.carousel-next { right: 8px; }
+
+[data-theme="dark"] .carousel-arrow {
+  background: rgba(28, 28, 30, 0.85);
+}
 
 /* Vidéos YouTube */
 .journey-videos {
@@ -474,7 +672,7 @@ a { color: inherit; text-decoration: none; }
 
 .wishlist-card:hover {
   transform: translateY(-4px);
-  box-shadow: 0 16px 32px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 16px 32px rgba(41, 121, 255, 0.12);
 }
 
 .wishlist-card-image {
@@ -562,6 +760,60 @@ a { color: inherit; text-decoration: none; }
 }
 
 .page-footnote a { color: var(--accent); font-weight: 500; }
+
+/* ---------- Garage : grille de vignettes ---------- */
+.garage-grid {
+  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+  gap: 20px;
+}
+
+.garage-card .card-body { padding: 16px 18px 20px; }
+.garage-card h3 { font-size: 1.1rem; margin: 6px 0 4px; }
+
+/* ---------- Garage : caractéristiques (page de détail) ---------- */
+.garage-specs {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(130px, 1fr));
+  gap: 12px;
+  margin-bottom: 24px;
+}
+
+.garage-spec {
+  background: var(--accent-soft-bg);
+  border-radius: var(--radius-md);
+  padding: 14px 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.garage-spec-label {
+  font-size: 0.72rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: var(--accent-soft-text);
+}
+
+.garage-spec-value {
+  font-size: 1.05rem;
+  font-weight: 600;
+  letter-spacing: -0.01em;
+}
+
+.garage-mods h3 {
+  font-size: 1.05rem;
+  font-weight: 600;
+  margin: 0 0 10px;
+}
+
+.garage-mods ul {
+  margin: 0 0 24px;
+  padding-left: 20px;
+  color: var(--text-soft);
+  font-weight: 300;
+  line-height: 1.7;
+}
 
 /* ---------- État vide ---------- */
 .empty-state {

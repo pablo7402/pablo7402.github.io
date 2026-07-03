@@ -1,0 +1,86 @@
+---
+layout: base.njk
+bodyClass: page-voyage-detail
+---
+<section class="journey-detail-wrap">
+  <p class="breadcrumb reveal">
+    <a href="/voyages/">Voyages</a>
+    <span>/</span>
+    <span>{{ titre or "Étape sans titre" }}</span>
+  </p>
+
+  <article class="journey journey-detail">
+    {% if image %}
+    <div class="journey-media reveal">
+      <img src="{{ image }}" alt="{{ titre or 'Photo de voyage' }}" loading="lazy">
+    </div>
+    {% endif %}
+
+    <div class="journey-info">
+      {% set metaLine = { region: region, date: date, distance: distance, duree: duree } | journeyMeta %}
+      {% if metaLine %}
+      <span class="card-eyebrow reveal">{{ metaLine | safe }}</span>
+      {% endif %}
+
+      <h1 class="reveal">{{ titre or "Étape sans titre" }}</h1>
+      {% if resume %}<p class="journey-resume reveal">{{ resume }}</p>{% endif %}
+
+      {% set tagsList = tags | validTags %}
+      {% if tagsList.length %}
+      <div class="tag-row reveal">
+        {% for tag in tagsList %}<span class="tag-pill">{{ tag }}</span>{% endfor %}
+      </div>
+      {% endif %}
+
+      {% if content %}
+      <div class="journey-recit reveal">{{ content | safe }}</div>
+      {% endif %}
+
+      {% set photosList = photos | validPhotos %}
+      {% if photosList.length == 1 %}
+      <div class="journey-gallery reveal">
+        <div class="journey-gallery-item">
+          <img src="{{ photosList[0] }}" alt="{{ titre or 'Photo de voyage' }}" loading="lazy">
+        </div>
+      </div>
+      {% elif photosList.length > 1 %}
+      <div class="journey-carousel reveal">
+        <div class="carousel-track" data-carousel>
+          {% for photo in photosList %}
+          <div class="carousel-slide">
+            <img src="{{ photo }}" alt="{{ titre or 'Photo de voyage' }}" loading="lazy">
+          </div>
+          {% endfor %}
+        </div>
+        <button class="carousel-arrow carousel-prev" data-carousel-prev aria-label="Photo précédente">&lsaquo;</button>
+        <button class="carousel-arrow carousel-next" data-carousel-next aria-label="Photo suivante">&rsaquo;</button>
+        <div class="carousel-dots" data-carousel-dots>
+          {% for photo in photosList %}
+          <button class="carousel-dot{% if loop.first %} is-active{% endif %}" data-carousel-dot aria-label="Aller à la photo {{ loop.index }}"></button>
+          {% endfor %}
+        </div>
+      </div>
+      {% endif %}
+
+      {% set videosList = videos | validVideos %}
+      {% if videosList.length %}
+      <div class="journey-videos reveal">
+        {% for video in videosList %}
+        {% set vid = video | youtubeId %}
+        {% if vid %}
+        <div class="video-embed">
+          <iframe src="https://www.youtube-nocookie.com/embed/{{ vid }}" title="Vidéo du voyage" loading="lazy" allowfullscreen referrerpolicy="strict-origin-when-cross-origin"></iframe>
+        </div>
+        {% endif %}
+        {% endfor %}
+      </div>
+      {% endif %}
+
+      {% if albumPhotos %}
+      <a class="album-link reveal" href="{{ albumPhotos }}" target="_blank" rel="noopener">Voir l'album photos complet ↗</a>
+      {% endif %}
+
+      <a class="back-link reveal" href="/voyages/">&larr; Tous les voyages</a>
+    </div>
+  </article>
+</section>
