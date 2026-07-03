@@ -6,24 +6,54 @@ bodyClass: page-voyages
 ---
 <section class="page-header">
   <h1 class="reveal">Voyages</h1>
-  <p class="lead reveal delay-1">Chaque étape, en quelques photos et quelques mots.</p>
+  <p class="lead reveal delay-1">Le carnet de bord, étape par étape.</p>
 </section>
 
 <section class="journeys">
   {% for voyage in collections.voyages %}
-  <article class="journey reveal" id="{{ voyage.data.titre | slugify }}">
+  <article class="journey reveal" id="{{ (voyage.data.titre or voyage.data.region or 'etape-' + loop.index) | slugify }}">
+    {% if voyage.data.image %}
     <div class="journey-media">
-      <img src="{{ voyage.data.image or '/images/voyage-placeholder.jpg' }}" alt="{{ voyage.data.titre }}" loading="lazy">
+      <img src="{{ voyage.data.image }}" alt="{{ voyage.data.titre or 'Photo de voyage' }}" loading="lazy">
     </div>
+    {% endif %}
+
     <div class="journey-info">
-      <span class="card-eyebrow">{{ voyage.data.region }} &middot; {{ voyage.data.date }}</span>
-      <h2>{{ voyage.data.titre }}</h2>
-      <p>{{ voyage.data.resume }}</p>
-      {% if voyage.data.distance or voyage.data.duree %}
-      <ul class="journey-meta">
-        {% if voyage.data.distance %}<li>{{ voyage.data.distance }}</li>{% endif %}
-        {% if voyage.data.duree %}<li>{{ voyage.data.duree }}</li>{% endif %}
-      </ul>
+      {% set metaLine = voyage.data | journeyMeta %}
+      {% if metaLine %}
+      <span class="card-eyebrow">{{ metaLine | safe }}</span>
+      {% endif %}
+
+      {% if voyage.data.titre %}<h2>{{ voyage.data.titre }}</h2>{% endif %}
+      {% if voyage.data.resume %}<p class="journey-resume">{{ voyage.data.resume }}</p>{% endif %}
+
+      {% if voyage.templateContent %}
+      <div class="journey-recit">{{ voyage.templateContent | safe }}</div>
+      {% endif %}
+
+      {% set photos = voyage.data.photos | validPhotos %}
+      {% if photos.length %}
+      <div class="journey-gallery">
+        {% for photo in photos %}
+        <div class="journey-gallery-item">
+          <img src="{{ photo.src }}" alt="{{ voyage.data.titre or 'Photo de voyage' }}" loading="lazy">
+        </div>
+        {% endfor %}
+      </div>
+      {% endif %}
+
+      {% set videos = voyage.data.videos | validVideos %}
+      {% if videos.length %}
+      <div class="journey-videos">
+        {% for video in videos %}
+        {% set vid = video.url | youtubeId %}
+        {% if vid %}
+        <div class="video-embed">
+          <iframe src="https://www.youtube-nocookie.com/embed/{{ vid }}" title="Vidéo du voyage" loading="lazy" allowfullscreen referrerpolicy="strict-origin-when-cross-origin"></iframe>
+        </div>
+        {% endif %}
+        {% endfor %}
+      </div>
       {% endif %}
     </div>
   </article>

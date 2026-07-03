@@ -30,6 +30,35 @@ module.exports = function (eleventyConfig) {
   eleventyConfig.addFilter("byCategory", (arr, slug) => {
     return (arr || []).filter((item) => item.data.categorie === slug);
   });
+  eleventyConfig.addFilter("youtubeId", (url) => {
+    if (!url) return "";
+    const match = String(url).match(
+      /(?:youtube\.com\/watch\?v=|youtu\.be\/|youtube\.com\/embed\/|youtube\.com\/shorts\/)([a-zA-Z0-9_-]{11})/
+    );
+    return match ? match[1] : "";
+  });
+  eleventyConfig.addFilter("validVideos", (arr) => {
+    return (arr || []).filter((v) => v && v.url);
+  });
+  eleventyConfig.addFilter("validPhotos", (arr) => {
+    return (arr || []).filter((p) => p && p.src);
+  });
+  eleventyConfig.addFilter("journeyMeta", (data) => {
+    if (!data) return "";
+    const parts = [];
+    if (data.region) parts.push(data.region);
+    if (data.date) {
+      const d = new Date(data.date);
+      if (!isNaN(d)) {
+        parts.push(
+          d.toLocaleDateString("fr-FR", { day: "2-digit", month: "long", year: "numeric" })
+        );
+      }
+    }
+    if (data.distance) parts.push(data.distance);
+    if (data.duree) parts.push(data.duree);
+    return parts.join(" &middot; ");
+  });
 
   // Fichiers/dossiers copiés tels quels vers la sortie
   eleventyConfig.addPassthroughCopy("src/css");

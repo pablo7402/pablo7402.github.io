@@ -299,69 +299,129 @@ a { color: inherit; text-decoration: none; }
   margin: 0 0 28px;
 }
 
-/* ---------- Voyages ---------- */
+/* ---------- Voyages (carnet de bord) ---------- */
 .journeys {
-  max-width: var(--max);
+  max-width: 900px;
   margin: 0 auto;
   padding: 20px 24px 120px;
   display: flex;
   flex-direction: column;
-  gap: 90px;
+  gap: 100px;
 }
 
 .journey {
-  display: grid;
-  grid-template-columns: 1.2fr 1fr;
-  gap: 48px;
-  align-items: center;
+  padding-bottom: 90px;
+  border-bottom: 1px solid var(--border);
 }
 
-.journey:nth-child(even) { direction: rtl; }
-.journey:nth-child(even) .journey-info { direction: ltr; }
-.journey:nth-child(even) .journey-media { direction: ltr; }
+.journey:last-child { border-bottom: none; padding-bottom: 0; }
 
 .journey-media {
   border-radius: var(--radius-lg);
   overflow: hidden;
-  aspect-ratio: 16 / 11;
+  aspect-ratio: 16 / 9;
+  margin-bottom: 32px;
 }
 
 .journey-media img { width: 100%; height: 100%; object-fit: cover; }
 
 .journey-info h2 {
-  font-size: clamp(1.6rem, 3vw, 2.2rem);
+  font-size: clamp(1.6rem, 3vw, 2.4rem);
   font-weight: 700;
   letter-spacing: -0.02em;
   margin: 10px 0 14px;
 }
 
-.journey-info p {
-  font-size: 1rem;
+.journey-resume {
+  font-size: 1.1rem;
   font-weight: 300;
   color: var(--text-soft);
   line-height: 1.6;
+  margin: 0 0 8px;
 }
 
-.journey-meta {
-  list-style: none;
-  display: flex;
-  gap: 12px;
-  padding: 0;
-  margin: 18px 0 0;
-}
-
-.journey-meta li {
+.journey-meta,
+.card-eyebrow {
   font-size: 12px;
   font-weight: 600;
-  padding: 6px 14px;
-  border-radius: 980px;
-  background: var(--bg-alt);
-  color: var(--text-soft);
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: var(--accent);
 }
 
-@media (max-width: 820px) {
-  .journey,
-  .journey:nth-child(even) { grid-template-columns: 1fr; direction: ltr; }
+/* Récit (markdown) */
+.journey-recit {
+  margin-top: 24px;
+  font-size: 1.02rem;
+  font-weight: 300;
+  line-height: 1.75;
+  color: var(--text);
+}
+
+.journey-recit p { margin: 0 0 20px; }
+.journey-recit h1,
+.journey-recit h2,
+.journey-recit h3 {
+  font-weight: 700;
+  letter-spacing: -0.01em;
+  margin: 32px 0 14px;
+}
+.journey-recit ul,
+.journey-recit ol { margin: 0 0 20px; padding-left: 22px; }
+.journey-recit li { margin-bottom: 8px; }
+.journey-recit img {
+  width: 100%;
+  border-radius: var(--radius-md);
+  margin: 28px 0;
+}
+.journey-recit a { color: var(--accent); text-decoration: underline; }
+
+/* Galerie photo */
+.journey-gallery {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+  gap: 12px;
+  margin-top: 32px;
+}
+
+.journey-gallery-item {
+  border-radius: 14px;
+  overflow: hidden;
+  aspect-ratio: 1 / 1;
+}
+
+.journey-gallery-item img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.4s ease;
+}
+
+.journey-gallery-item:hover img { transform: scale(1.06); }
+
+/* Vidéos YouTube */
+.journey-videos {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  margin-top: 32px;
+}
+
+.video-embed {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  border-radius: var(--radius-md);
+  overflow: hidden;
+  background: var(--bg-alt);
+}
+
+.video-embed iframe {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  border: 0;
 }
 
 /* ---------- Wishlist ---------- */

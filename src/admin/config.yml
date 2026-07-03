@@ -32,18 +32,28 @@ collections:
     folder: "src/voyages"
     create: true
     delete: true
-    slug: "{{year}}-{{month}}-{{slug}}"
-    identifier_field: titre
-    summary: "{{titre}} — {{region}} ({{date}})"
+    slug: "{{uuid}}"
+    summary: "{{titre}}"
     sortable_fields: ["date", "titre"]
     fields:
-      - { label: "Titre", name: "titre", widget: "string" }
-      - { label: "Région", name: "region", widget: "string", hint: "Ex: Cévennes, Alpes, Pyrénées..." }
-      - { label: "Date", name: "date", widget: "datetime", format: "YYYY-MM-DD", date_format: "YYYY-MM-DD", time_format: false }
-      - { label: "Photo principale", name: "image", widget: "image" }
-      - { label: "Résumé (quelques mots suffisent)", name: "resume", widget: "text" }
+      - { label: "Titre", name: "titre", widget: "string", required: false }
+      - { label: "Région / Zone", name: "region", widget: "string", required: false, hint: "Ex: Cévennes, Alpes, Pyrénées..." }
+      - { label: "Date", name: "date", widget: "datetime", required: false, format: "YYYY-MM-DD", date_format: "YYYY-MM-DD", time_format: false }
       - { label: "Distance", name: "distance", widget: "string", required: false, hint: "Ex: 320 km" }
       - { label: "Durée", name: "duree", widget: "string", required: false, hint: "Ex: 3 jours" }
+      - { label: "Photo de couverture", name: "image", widget: "image", required: false }
+      - { label: "Résumé court (affiché sur la page d'accueil)", name: "resume", widget: "text", required: false }
+      - { label: "Récit / notes", name: "body", widget: "markdown", required: false, hint: "Raconte le trip : étapes, anecdotes, ressenti... aussi long ou court que tu veux." }
+      - label: "Photos supplémentaires"
+        name: "photos"
+        widget: "list"
+        required: false
+        field: { label: "Photo", name: "src", widget: "image" }
+      - label: "Vidéos YouTube"
+        name: "videos"
+        widget: "list"
+        required: false
+        field: { label: "Lien YouTube", name: "url", widget: "string", hint: "Colle l'URL de la vidéo (ex: https://youtu.be/...)" }
 
   - name: "wishlist"
     label: "Liste de souhaits"

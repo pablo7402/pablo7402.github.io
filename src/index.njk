@@ -21,14 +21,14 @@ bodyClass: page-home
 
 <section class="cards-grid">
   {% for voyage in collections.voyages | limit(3) %}
-  <a class="card reveal" href="/voyages/#{{ voyage.data.titre | slugify }}">
+  <a class="card reveal" href="/voyages/#{{ (voyage.data.titre or voyage.data.region or 'etape-' + loop.index) | slugify }}">
     <div class="card-image">
-      <img src="{{ voyage.data.image or '/images/voyage-placeholder.jpg' }}" alt="{{ voyage.data.titre }}" loading="lazy">
+      <img src="{{ voyage.data.image or '/images/voyage-placeholder.jpg' }}" alt="{{ voyage.data.titre or 'Voyage' }}" loading="lazy">
     </div>
     <div class="card-body">
-      <span class="card-eyebrow">{{ voyage.data.region }}</span>
-      <h3>{{ voyage.data.titre }}</h3>
-      <p>{{ voyage.data.resume }}</p>
+      {% if voyage.data.region %}<span class="card-eyebrow">{{ voyage.data.region }}</span>{% endif %}
+      <h3>{{ voyage.data.titre or "Étape sans titre" }}</h3>
+      {% if voyage.data.resume %}<p>{{ voyage.data.resume }}</p>{% endif %}
     </div>
   </a>
   {% else %}
