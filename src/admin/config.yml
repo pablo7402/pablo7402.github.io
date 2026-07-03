@@ -3,6 +3,7 @@ backend:
   repo: "pablo7402/pablo7402.github.io"
   branch: main
   base_url: "https://pablo7402-github-io.vercel.app"
+  auth_endpoint: "api/auth"
 
 # Sécurité : la connexion se fait avec ton compte GitHub (bouton "Login with
 # GitHub"). Seul un compte ayant les droits d'écriture sur ce dépôt peut
