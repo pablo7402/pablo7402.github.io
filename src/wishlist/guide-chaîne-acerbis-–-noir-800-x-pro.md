@@ -1,7 +1,7 @@
 ---
-titre: Guide chaîne Acerbis – Noir 800 X PRO
+titre: Poignées chauffantes Tecno globe GOLD PREMIUM APOLLO II Universel
 categorie: equipement
-image: https://kove-racing.com/wp-content/uploads/2025/07/Guide-chaine-Acerbis-8211-Noir-800-X-PRO.jpg
-prix: 48
-lien: https://kove-racing.com/produit/guide-chaine-acerbis-noir-800-x-pro/
+image: https://media-imgproxy.motoblouz.com/_/rs580x2/images/catalogue/pc-gold-evo-fond-blanc.jpg
+prix: 128.7
+lien: https://www.motoblouz.com/vente-poignees-chauffantes-tecno-globe-gold-premium-apollo-ii-173409.html
 ---
