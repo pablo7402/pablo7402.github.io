@@ -1,5 +1,5 @@
 ---
-titre: "EXEMPLE — Traversée du Massif Central (TET)"
+titre: TEST
 categorie: destinations
-note: "à supprimer ou modifier via /admin"
+note: "lien ici et image "
 ---
