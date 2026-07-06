@@ -1,0 +1,24 @@
+{% if photosList.length == 1 %}
+<div class="journey-gallery reveal">
+  <div class="journey-gallery-item">
+    <img src="{{ photosList[0] }}" alt="{{ titre or 'Photo' }}" loading="lazy">
+  </div>
+</div>
+{% elif photosList.length > 1 %}
+<div class="photo-grid-wrap reveal">
+  <div class="photo-grid" data-photo-grid>
+    {% for photo in photosList %}
+    <button class="photo-thumb" data-photo-thumb="{{ photo }}" aria-label="Voir la photo {{ loop.index }} en plein écran">
+      <img src="{{ photo }}" alt="{{ titre or 'Photo' }}" loading="lazy">
+    </button>
+    {% endfor %}
+  </div>
+  <div class="lightbox" data-lightbox>
+    <button class="lightbox-close" data-lightbox-close aria-label="Fermer">&times;</button>
+    <button class="lightbox-arrow lightbox-prev" data-lightbox-prev aria-label="Photo précédente">&lsaquo;</button>
+    <img class="lightbox-img" data-lightbox-img alt="{{ titre or 'Photo' }}">
+    <button class="lightbox-arrow lightbox-next" data-lightbox-next aria-label="Photo suivante">&rsaquo;</button>
+    <span class="lightbox-counter" data-lightbox-counter></span>
+  </div>
+</div>
+{% endif %}

@@ -57,30 +57,7 @@ bodyClass: page-garage-detail
       {% endif %}
 
       {% set photosList = photos | validPhotos %}
-      {% if photosList.length == 1 %}
-      <div class="journey-gallery reveal">
-        <div class="journey-gallery-item">
-          <img src="{{ photosList[0] }}" alt="{{ titre or 'Photo de moto' }}" loading="lazy">
-        </div>
-      </div>
-      {% elif photosList.length > 1 %}
-      <div class="journey-carousel reveal">
-        <div class="carousel-track" data-carousel>
-          {% for photo in photosList %}
-          <div class="carousel-slide">
-            <img src="{{ photo }}" alt="{{ titre or 'Photo de moto' }}" loading="lazy">
-          </div>
-          {% endfor %}
-        </div>
-        <button class="carousel-arrow carousel-prev" data-carousel-prev aria-label="Photo précédente">&lsaquo;</button>
-        <button class="carousel-arrow carousel-next" data-carousel-next aria-label="Photo suivante">&rsaquo;</button>
-        <div class="carousel-dots" data-carousel-dots>
-          {% for photo in photosList %}
-          <button class="carousel-dot{% if loop.first %} is-active{% endif %}" data-carousel-dot aria-label="Aller à la photo {{ loop.index }}"></button>
-          {% endfor %}
-        </div>
-      </div>
-      {% endif %}
+      {% include "photo-gallery.njk" %}
 
       <a class="back-link reveal" href="/garage/">&larr; Tout le garage</a>
     </div>

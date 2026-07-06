@@ -44,54 +44,56 @@
     });
   }
 
-  // Carrousel photo (voyages)
-  document.querySelectorAll("[data-carousel]").forEach(function (track) {
-    var wrap = track.closest(".journey-carousel");
-    if (!wrap) return;
+  // Grille de photos + visionneuse plein écran (voyages, garage)
+  document.querySelectorAll("[data-photo-grid]").forEach(function (grid) {
+    var thumbs = Array.prototype.slice.call(grid.querySelectorAll("[data-photo-thumb]"));
+    if (!thumbs.length) return;
 
-    var slides = Array.prototype.slice.call(track.children);
-    var dots = Array.prototype.slice.call(wrap.querySelectorAll("[data-carousel-dot]"));
-    var prevBtn = wrap.querySelector("[data-carousel-prev]");
-    var nextBtn = wrap.querySelector("[data-carousel-next]");
+    var lightbox = grid.parentElement.querySelector("[data-lightbox]");
+    if (!lightbox) return;
 
-    function setActiveDot(index) {
-      dots.forEach(function (dot, i) {
-        dot.classList.toggle("is-active", i === index);
-      });
+    var lightboxImg = lightbox.querySelector("[data-lightbox-img]");
+    var closeBtn = lightbox.querySelector("[data-lightbox-close]");
+    var prevBtn = lightbox.querySelector("[data-lightbox-prev]");
+    var nextBtn = lightbox.querySelector("[data-lightbox-next]");
+    var counter = lightbox.querySelector("[data-lightbox-counter]");
+    var photos = thumbs.map(function (t) { return t.getAttribute("data-photo-thumb"); });
+    var currentIndex = 0;
+
+    function show(index) {
+      currentIndex = (index + photos.length) % photos.length;
+      lightboxImg.src = photos[currentIndex];
+      if (counter) counter.textContent = (currentIndex + 1) + " / " + photos.length;
     }
 
-    function scrollToSlide(index) {
-      if (!slides[index]) return;
-      track.scrollTo({ left: slides[index].offsetLeft - track.offsetLeft, behavior: "smooth" });
+    function open(index) {
+      show(index);
+      lightbox.classList.add("is-open");
+      document.body.classList.add("lightbox-locked");
     }
 
-    dots.forEach(function (dot, i) {
-      dot.addEventListener("click", function () { scrollToSlide(i); });
+    function close() {
+      lightbox.classList.remove("is-open");
+      document.body.classList.remove("lightbox-locked");
+    }
+
+    thumbs.forEach(function (thumb, i) {
+      thumb.addEventListener("click", function () { open(i); });
     });
 
-    if (prevBtn) {
-      prevBtn.addEventListener("click", function () {
-        track.scrollBy({ left: -track.clientWidth * 0.8, behavior: "smooth" });
-      });
-    }
-    if (nextBtn) {
-      nextBtn.addEventListener("click", function () {
-        track.scrollBy({ left: track.clientWidth * 0.8, behavior: "smooth" });
-      });
-    }
+    if (closeBtn) closeBtn.addEventListener("click", close);
+    if (prevBtn) prevBtn.addEventListener("click", function () { show(currentIndex - 1); });
+    if (nextBtn) nextBtn.addEventListener("click", function () { show(currentIndex + 1); });
 
-    if ("IntersectionObserver" in window) {
-      var slideObserver = new IntersectionObserver(
-        function (entries) {
-          entries.forEach(function (entry) {
-            if (entry.isIntersecting) {
-              setActiveDot(slides.indexOf(entry.target));
-            }
-          });
-        },
-        { root: track, threshold: 0.6 }
-      );
-      slides.forEach(function (slide) { slideObserver.observe(slide); });
-    }
+    lightbox.addEventListener("click", function (e) {
+      if (e.target === lightbox) close();
+    });
+
+    document.addEventListener("keydown", function (e) {
+      if (!lightbox.classList.contains("is-open")) return;
+      if (e.key === "Escape") close();
+      if (e.key === "ArrowLeft") show(currentIndex - 1);
+      if (e.key === "ArrowRight") show(currentIndex + 1);
+    });
   });
 })();
