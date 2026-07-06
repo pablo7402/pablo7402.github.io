@@ -5,12 +5,18 @@ region: Le Sud
 date: 2026-06-14
 distance: "1026"
 duree: 4 jours
-image: /images/uploads/whatsapp-image-2026-06-16-at-12.30.51.jpeg
+image: /images/uploads/gemini_generated_image_njnujdnjnujdnjnu.png
 resume: "Road trip moto bivouac, sans bivouac. "
 photos:
   - /images/uploads/gemini_generated_image_njnujdnjnujdnjnu.png
   - /images/uploads/gemini_generated_image_473wa0473wa0473w.png
   - /images/uploads/whatsapp-image-2026-06-16-at-12.30.49.jpeg
+  - /images/uploads/img_6768.jpeg
+  - /images/uploads/img_6786.jpeg
+  - /images/uploads/img_6792.jpeg
+  - /images/uploads/img_6910.jpeg
+  - /images/uploads/img_6930.jpeg
+  - /images/uploads/img_6780.jpeg
 ---
 Cela faisait un moment qu’on parlait de partir quelques jours ensemble. Le programme était simple : quatre jours de moto, des pistes, du bivouac, aucun planning précis… et surtout profiter.
 
