@@ -11,7 +11,7 @@ photos:
   - /images/uploads/gemini_generated_image_njnujdnjnujdnjnu.png
   - /images/uploads/gemini_generated_image_473wa0473wa0473w.png
   - /images/uploads/whatsapp-image-2026-06-16-at-12.30.49.jpeg
-  - /images/uploads/img_6768.jpeg
+  - /images/uploads/img_6917.jpeg
   - /images/uploads/img_6786.jpeg
   - /images/uploads/img_6792.jpeg
   - /images/uploads/img_6910.jpeg
